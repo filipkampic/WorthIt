@@ -80,6 +80,17 @@ async function registerUser({ username, email, password, confirmPassword }) {
 }
 
 async function loginUser({ email, password }) {
+    if (!email || email.trim() === "") {
+        throw new Error("Email is required.");
+    }
+    if (!password || password.trim() === "") {
+        throw new Error("Password is required.");
+    }
+
+    if (!email.includes("@") || !email.includes(".")) {
+        throw new Error("Invalid email format.");
+    }
+
     const snapshot = await db.collection("users").where("email", "==", email).get();
     if (snapshot.empty) {
         throw new Error("Invalid login credentials");
