@@ -1,8 +1,11 @@
 const { db } = require("../config/firebase");
 
 async function getProfile(userId) {
-    const doc = await db.collection("users").doc(userId).get();
+    if (!userId || typeof userId !== "string" || userId.trim() === "") {
+        throw new Error("Invalid user ID.");
+    }
 
+    const doc = await db.collection("users").doc(userId).get();
     if (!doc.exists) {
         throw new Error("User not found.");
     }
@@ -28,6 +31,15 @@ async function getProfile(userId) {
 }
 
 async function getProfileStats(userId) {
+    if (!userId || typeof userId !== "string" || userId.trim() === "") {
+        throw new Error("Invalid user ID.");
+    }
+
+    const userDoc = await db.collection("users").doc(userId).get();
+    if (!userDoc.exists) {
+        throw new Error("User not found.");
+    }
+
     const snapshot = await db
         .collection("reviews")
         .where("userId", "==", userId)
