@@ -12,10 +12,14 @@ async function getAllItems() {
 }
 
 async function getItemById(id) {
+    if (!id || typeof id !== "string" || id.trim() === "") {
+        throw new Error("Invalid item ID.");
+    }
+
     const doc = await db.collection("items").doc(id).get();
 
     if (!doc.exists) {
-        throw new Error("Item doesn't exist.");
+        throw new Error("Item not found");
     }
 
     return {
