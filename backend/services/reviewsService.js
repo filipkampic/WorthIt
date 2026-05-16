@@ -26,14 +26,37 @@ async function getReviewsForItem(itemId) {
 async function addReview(itemId, data) {
     const { userId, rating, comment } = data;
 
-    if (!rating || rating < 1 || rating > 5) {
-        throw new Error("The rating must be between 1 and 5.");
+    if (!itemId || typeof itemId !== "string" || itemId.trim() === "") {
+        throw new Error("Invalid item ID.");
+    }
+
+    if (!userId || typeof userId !== "string" || userId.trim() === "") {
+        throw new Error("Invalid user ID.");
+    }
+
+    const numericRating = Number(rating);
+    if (!numericRating || numericRating < 1 || numericRating > 5) {
+        throw new Error("Rating must be between 1 and 5");
+    }
+
+    if (comment && typeof comment !== "string") {
+        throw new Error("Comment must be a string.");
+    }
+
+    const itemDoc = await db.collection("items").doc(itemId).get();
+    if (!itemDoc.exists) {
+        throw new Error("Item not found.");
+    }
+
+    const userDoc = await db.collection("users").doc(userId).get();
+    if (!userDoc.exists) {
+        throw new Error("User not found.");
     }
 
     const reviewData = {
         itemId,
         userId,
-        rating,
+        rating: numericRating,
         comment: comment || "",
         createdAt: new Date()
     };
