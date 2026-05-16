@@ -1,6 +1,15 @@
 const { db } = require("../config/firebase");
 
 async function getReviewsForItem(itemId) {
+    if (!itemId || typeof itemId !== "string" || itemId.trim() === "") {
+        throw new Error("Invalid item ID.");
+    }
+
+    const itemDoc = await db.collection("items").doc(itemId).get();
+    if (!itemDoc.exists) {
+        throw new Error("Item not found.");
+    }
+
     const snapshot = await db
         .collection("reviews")
         .where("itemId", "==", itemId)
