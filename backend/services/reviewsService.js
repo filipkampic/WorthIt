@@ -70,10 +70,13 @@ async function addReview(itemId, data) {
 }
 
 async function deleteReview(reviewId) {
-    const doc = await db.collection("reviews").doc(reviewId).get();
+    if (!reviewId || typeof reviewId !== "string" || reviewId.trim() === "") {
+        throw new Error("Invalid review ID.");
+    }
 
+    const doc = await db.collection("reviews").doc(reviewId).get();
     if (!doc.exists) {
-        throw new Error("Review doesn't exist");
+        throw new Error("Review not found.");
     }
 
     await db.collection("reviews").doc(reviewId).delete();

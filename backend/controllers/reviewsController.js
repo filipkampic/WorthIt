@@ -30,7 +30,7 @@ exports.deleteReview = async (req, res) => {
         const { reviewId } = req.params;
         await reviewsService.deleteReview(reviewId);
         return res.status(200).json({ message: "Review deleted."});
-    } catch (error) {
+    } catch (err) {
         return res.status(400).json({ error: err.message });
     }
 };
