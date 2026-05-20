@@ -7,16 +7,17 @@ async function get(path) {
     return res.json();
 }
 
-async function post(path, data) {
-    const res = await fetch(BASE_URL + path, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            ...authHeader()
-        },
-        body: JSON.stringify(data)
-    });
-    return res.json();
+async function post(path, body) {
+    try {
+        const res = await fetch(BASE_URL + path, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        });
+        return await res.json();
+    } catch (err) {
+        return { error: "Network error. Please try again." };
+    }
 }
 
 async function del(path) {

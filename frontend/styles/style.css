@@ -1,0 +1,45 @@
+:root {
+    --primary: #4A90E2;
+    --primary-dark: #357ABD;
+    --background: #F5F7FA;
+    --text: #222;
+    --error-color: #E74C3C;
+    --success-color: #2ECC71;
+    --border-color: #DDD;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+p {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

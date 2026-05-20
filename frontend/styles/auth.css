@@ -1,0 +1,115 @@
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 400px;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+input {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+button[type="submit"] {
+    padding: 0.7rem;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button[type="submit"]:hover {
+    background: var(--primary-dark);
+}
+
+#loginError, #registerError {
+    color: var(--error-color);
+    font-size: 0.875rem;
+    min-height: 1.2em;
+}
+
+#passwordStrength {
+    font-size: 0.8rem;
+    font-weight: 600;
+    min-height: 0;
+    overflow: hidden;
+    transition: all 0.2s;
+}
+
+#passwordStrength:empty {
+    margin: 0;
+    padding: 0;
+}
+
+#passwordStrength .strength-bar {
+    height: 4px;
+    border-radius: 2px;
+    margin-bottom: 4px;
+    transition: width 0.3s, background 0.3s;
+}
+
+#passwordStrength.weak .strength-bar   { width: 25%; background: #E74C3C; }
+#passwordStrength.moderate .strength-bar { width: 50%; background: #E67E22; }
+#passwordStrength.strong .strength-bar   { width: 75%; background: #27AE60; }
+#passwordStrength.very-strong .strength-bar { width: 100%; background: #2ECC71; }
+
+#passwordStrength.weak .strength-label   { color: #E74C3C; }
+#passwordStrength.moderate .strength-label { color: #E67E22; }
+#passwordStrength.strong .strength-label   { color: #27AE60; }
+#passwordStrength.very-strong .strength-label { color: #2ECC71; }
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    padding-right: 2.5rem;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: #888;
+    font-size: 1.1rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-password:hover {
+    color: var(--primary);
+}
+
+.success-msg {
+    color: var(--success-color);
+    font-size: 0.875rem;
+    min-height: 1.2em;
+}
+
+@media (max-width: 480px) {
+    form {
+        padding: 1.25rem;
+    }
+}
