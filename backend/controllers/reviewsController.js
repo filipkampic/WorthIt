@@ -28,7 +28,8 @@ exports.addReview = async (req, res) => {
 exports.deleteReview = async (req, res) => {
     try {
         const { reviewId } = req.params;
-        await reviewsService.deleteReview(reviewId);
+        const { userId } = req.body;
+        await reviewsService.deleteReview(reviewId, userId);
         return res.status(200).json({ message: "Review deleted."});
     } catch (err) {
         return res.status(400).json({ error: err.message });

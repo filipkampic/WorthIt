@@ -2,18 +2,22 @@ const { db } = require("../config/firebase");
 
 function calcDerivedFields(reviews) {
     const count = reviews.length;
-    if (count === 0) return { avgRating: 0, avgValue: 0, worthScore: 0, status: "Unrated", reviewCount: 0 };
+    if (count === 0) return { avgRating: 0, worthScore: 0, status: "Unrated", reviewCount: 0 };
 
     const avgRating = reviews.reduce((s, r) => s + r.rating, 0) / count;
-    const avgValue = reviews.reduce((s, r) => s + (r.value || r.rating), 0) / count;
-    const worthScore = Math.round(((avgRating + avgValue) / 2) * 2 * 10) / 10;
+    const worthScore = Math.round(avgRating * 2 * 10) / 10;
 
     let status;
     if (avgValue >= 4) status = "Bargain";
     else if (avgValue >= 2.5) status = "Worth It";
     else status = "Overpriced";
 
-    return { avgRating: Math.round(avgRating * 10) / 10, avgValue: Math.round(avgValue * 10) / 10, worthScore, status, reviewCount: count };
+    return { 
+        avgRating: Math.round(avgRating * 10) / 10, 
+        worthScore, 
+        status, 
+        reviewCount: count 
+    };
 }
 
 async function getAllItems() {

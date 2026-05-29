@@ -69,7 +69,7 @@ async function addReview(itemId, data) {
     };
 }
 
-async function deleteReview(reviewId) {
+async function deleteReview(reviewId, userId) {
     if (!reviewId || typeof reviewId !== "string" || reviewId.trim() === "") {
         throw new Error("Invalid review ID.");
     }
@@ -77,6 +77,10 @@ async function deleteReview(reviewId) {
     const doc = await db.collection("reviews").doc(reviewId).get();
     if (!doc.exists) {
         throw new Error("Review not found.");
+    }
+
+    if (doc.data().userId !== userId) {
+        throw new Error("Unauthorized.");
     }
 
     await db.collection("reviews").doc(reviewId).delete();
