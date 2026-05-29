@@ -10,6 +10,20 @@ exports.getReviewsForItem = async (req, res) => {
     }
 };
 
+exports.getReviewsByUser = async (req, res) => {
+    try {
+        const { userId } = req.query;
+
+        const reviews = await reviewsService.getReviewsByUser(userId);
+
+        return res.status(200).json(reviews);
+    } catch (err) {
+        return res.status(400).json({
+            error: err.message
+        });
+    }
+};
+
 exports.addReview = async (req, res) => {
     try {
         const { itemId } = req.params;
