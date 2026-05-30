@@ -3,14 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorthIt - Items</title>
+    <title>WorthIt</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
-    <h1>All Products</h1>
-    <div id="items"></div>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <span class="nav-logo-icon">👍</span>
+                <span class="nav-logo-text">WorthIt</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="explore.html" class="nav-link">Explore</a></li>
+                <li><a href="graph.html" class="nav-link">Stats</a></li>
+                <li><a href="add-product.html" class="nav-link">Add Product</a></li>
+                <li><a href="literatura.html" class="nav-link">Literature</a></li>
+            </ul>
+            <div class="nav-search">
+                <input type="text" id="navbar-search" class="nav-search-input" placeholder="Search products...">
+                <span class="nav-search-icon">🔍</span>
+            </div>
+            <div class="nav-aith" id="nav-auth"></div>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <h1 class="hero-title">Is it actually<br><span class="hero-accent">worth the price?</span></h1>
+                <p class="hero-subtitle">Find honest reviews and detailed stats for every product before you buy.</p>
+                <div class="hero-cta">
+                    <a href="explore.html" class="btn btn-primary">Explore Products</a>
+                    <a href="add-product.html" class="btn btn-primary">Add Product</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-number" id="stat-products">—</span>
+                        <span class="hero-stat-label">Products</span>
+                    </div> 
+                    <div class="hero-stat">
+                        <span class="hero-stat-number" id="stat-reviews">—</span>
+                        <span class="hero-stat-label">Reviews</span>
+                    </div> 
+                    <div class="hero-stat">
+                        <span class="hero-stat-number" id="stat-categories">—</span>
+                        <span class="hero-stat-label">Categories</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-cards" id="hero-cards"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="filter-bar">
+        <div class="filter-inner">
+            <div class="filter-search">
+                <input type="text id=search-input" class="filter-search-input" placeholder="Search for products...">
+                <span class="filter-search-icon">🔍</span>
+            </div>
+            <div class="filter-categories" id="category-filters">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="Tech">Tech</button>
+                <button class="filter-btn" data-category="Gaming">Gaming</button>
+                <button class="filter-btn" data-category="Fashion">Fashion</button>
+                <button class="filter-btn" data-category="Food">Food</button>
+                <button class="filter-btn" data-category="Home">Home</button>
+                <button class="filter-btn" data-category="Wellness">Wellness</button>
+                <button class="filter-btn" data-category="Other">Other</button>
+            </div>
+            <select class="filter-sort" id="sort-select">
+                <option value="default">Most Popular</option>
+                <option value="rating-desc">Highest Rated</option>
+                <option value="rating-asc">Lowest Rated</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: Hight to Low</option>
+                <option value="bargain">Bargains First</option>
+            </select>
+        </div>
+    </section>
+
+    <main class="products-section">
+        <div class="products-inner">
+            <div class="products-grid" id="products-grid"></div>
+            <div class="empty-state hidden" id="empty-state">
+                <div class="empty-icon">🔍</div>
+                <h3 class="empty-title">No matching products found.</h3>
+                <p class="empty-text">Try adjusting your search or filter.</p>
+            </div>
+            <div class="loading-state" id="loading-state">
+                <div class="spinner"></div>
+                <p>Loading products...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-logo">👍 WorthIt</span>
+                <p class="footer-tagline">Honest community reviews.<br>Real value insights.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Navigate</h4>
+                    <a href="index.html">Home</a>
+                    <a href="explore.html">Explore</a>
+                    <a href="graph.html">Stats</a>
+                    <a href="add-product.html">Add Product</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="login.html">Login</a>
+                    <a href="register.html">Sign Up</a>
+                    <a href="profile.html">Profile</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <a href="literatura.html">Literature</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026. WorthIt. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="scripts/api.js"></script>
+    <script src="scripts/utils.js"></script>
     <script src="scripts/items.js"></script>
 </body>
 </html>

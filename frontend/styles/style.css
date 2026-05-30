@@ -1,11 +1,18 @@
 :root {
-    --primary: #4A90E2;
-    --primary-dark: #357ABD;
+    --primary: #4F46E5;
+    --primary-dark: #4338CA;
     --background: #F5F7FA;
     --text: #222;
     --error-color: #E74C3C;
     --success-color: #2ECC71;
     --border-color: #DDD;
+    --bargain: #16A34A;
+    --worth-it: #4F46E5;
+    --overpriced: #DC2626;
+    --text-muted: #6B7280;
+    --card-bg: #FFFFFF;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --radius: 16px;
 }
 
 *, *::before, *::after {
