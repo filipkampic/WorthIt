@@ -8,8 +8,8 @@ function calcDerivedFields(reviews) {
     const worthScore = Math.round(avgRating * 2 * 10) / 10;
 
     let status;
-    if (avgValue >= 4) status = "Bargain";
-    else if (avgValue >= 2.5) status = "Worth It";
+    if (avgRating >= 4) status = "Bargain";
+    else if (avgRating >= 2.5) status = "Worth It";
     else status = "Overpriced";
 
     return { 

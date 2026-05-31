@@ -1,5 +1,3 @@
-const BASE_URL = "http://localhost:3000";
-
 let allItems = [];
 
 document.addEventListener("DOMContentLoaded", () => {
