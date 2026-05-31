@@ -1,4 +1,7 @@
 let allItems = [];
+let filteredItems = [];
+let currentPage = 1;
+const ITEMS_PER_PAGE = 12;
 
 document.addEventListener("DOMContentLoaded", () => {
     loadItems();
@@ -13,14 +16,24 @@ async function loadItems() {
         const res = await fetch(`${BASE_URL}/items`);
         const data = await res.json();
         allItems = data;
+        filteredItems = data;
         updateHeroStats(data);
         renderHeroCards(data);
-        renderCards(data);
+        renderPage(1);
     } catch (err) {
         showError();
     } finally {
         showLoading(false);
     }
+}
+
+function renderPage(page) {
+    currentPage = page;
+    const start = (page - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+    const pageItems = filteredItems.slice(start, end);
+    renderCards(pageItems);
+    renderPagination();
 }
 
 function renderCards(items) {
@@ -30,6 +43,7 @@ function renderCards(items) {
     if (items.length === 0) {
         grid.innerHTML = "";
         empty.classList.remove("hidden");
+        document.getElementById("pagination").innerHTML = "";
         return;
     }
 
@@ -41,6 +55,42 @@ function renderCards(items) {
             window.location.href = `item.html?id=${card.dataset.id}`;
         });
     });
+}
+
+function renderPagination() {
+    const container = document.getElementById("pagination");
+    const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
+
+    if (totalPages <= 1) {
+        container.innerHTML = "";
+        return;
+    }
+
+    let html = `
+        <button class="page-btn page-prev" ${currentPage === 1 ? "disabled" : ""} onclick="renderPage(${currentPage - 1})">
+            ← Previous
+        </button>
+    `;
+
+    for (let i = 1; i <= totalPages; i++) {
+        if (
+            i === 1 ||
+            i === totalPages ||
+            (i >= currentPage - 1 && i <= currentPage + 1)
+        ) {
+            html += `<button class="page-btn ${i === currentPage ? "active" : ""}" onclick="renderPage(${i})">${i}</button>`;
+        } else if (i === currentPage - 2 || i === currentPage + 2) {
+            html += `<span class="page-dots">...</span>`;
+        }
+    }
+
+    html += `
+        <button class="page-btn page-next" ${currentPage === totalPages ? "disabled" : ""} onclick="renderPage(${currentPage + 1})">
+            Next →
+        </button>
+    `;
+
+    container.innerHTML = html;
 }
 
 function createCardHTML(item) {
@@ -139,8 +189,8 @@ function applyFilters() {
         );
     }
 
-    filtered = sortItems(filtered, sort);
-    renderCards(filtered);
+    filteredItems = sortItems(filtered, sort);
+    renderPage(1);
 }
 
 function sortItems(items, sort) {
