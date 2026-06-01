@@ -3,14 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorthIt - Item Details</title>
+    <title>WorthIt - Product Detail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/item.css">
 </head>
 <body>
-    <div id="item"></div>
-    <div id="reviews"></div>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <img src="img/worth-it-logo.png" alt="WorthIt" class="nav-logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="explore.html" class="nav-link">Explore</a></li>
+                <li><a href="graph.html" class="nav-link">Stats</a></li>
+                <li><a href="add-product.html" class="nav-link">Add Product</a></li>
+            </ul>
+            <div class="nav-search">
+                <input type="text" id="navbar-search" class="nav-search-input" placeholder="Search products...">
+                <button class="nav-search-btn" onclick="handleNavSearch()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+            </div>
+            <div class="nav-auth" id="nav-auth"></div>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="item-loading" id="item-loading">
+        <div class="loading-spinner"></div>
+        <p>Loading product...</p>
+    </div>
+
+    <div class="item-error" id="item-error" style="display: none;">
+        <p>Product not found.</p>
+        <a href="index.html" class="btn btn-primary">Back to Home</a>
+    </div>
+
+    <main class="item-main" id="item-main" style="display: none;">
+        <div class="breadcrumb-wrap">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="breadcrumb-sep">›</span>
+                <a href="explore.html">Explore</a>
+                <span class="breadcrumb-sep">›</span>
+                <span id="breadcrumb-name">Product</span>
+            </div>
+        </div>
+
+        <section class="product-hero">
+            <div class="product-hero-inner">
+                <div class="product-gallery">
+                    <div class="gallery-main">
+                        <img src="" alt="Product image" id="gallery-main-img" class="gallery-main-img">
+                    </div>
+                    <div class="gallery-thumbs" id="gallery-thumbs"></div>
+                </div>
+
+                <div class="product-info">
+                    <div class="product-meta-top">
+                        <span class="product-category" id="product-category">Category</span>
+                        <span class="status-badge" id="product-status-badge">Worth It</span>
+                    </div>
+
+                    <h1 class="product-title" id="product-title">Product Name</h1>
+                    <p class="product-price" id="product-price">€0.00</p>
+                    <p class="product-description" id="product-description"></p>
+
+                    <div class="worth-score-card">
+                        <div class="worth-score-left">
+                            <span class="worth-score-label">Worth Score</span>
+                            <span class="worth-score-number" id="worth-score">—</span>
+                            <span class="worth-score-max">/10</span>
+                        </div>
+                        <div class="worth-score-right">
+                            <p class="worth-score-desc" id="worth-score-desc">Based on community reviews.</p>
+                            <div class="worth-score-bar-wrap">
+                                <div class="worth-score-bar" id="worth-score-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-cta">
+                        <button class="btn btn-primary" id="btn-add-review">Add Review</button>
+                        <button class="btn btn-ghost" id="btn-save">Save Product</button>
+                        <button class="btn btn-ghost" id="btn-share">Share</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <section class="metrics-section">
+            <div class="metrics-inner">
+                <div class="metric-card">
+                    <span class="metric-icon">⭐</span>
+                    <span class="metric-value" id="metric-rating">—</span>
+                    <span class="metric-label">Quality Rating</span>
+                    <span class="metric-sub">out of 5</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-icon">💰</span>
+                    <span class="metric-value" id="metric-worth-score">—</span>
+                    <span class="metric-label">Worth Score</span>
+                    <span class="metric-sub">out of 10</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-icon">👥</span>
+                    <span class="metric-value" id="metric-review-count">—</span>
+                    <span class="metric-label">Community Reviews</span>
+                    <span class="metric-sub">total ratings</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="reviews-section">
+            <div class="reviews-inner">
+                <div class="reviews-header">
+                    <h2 class="reviews-title">Reviews</h2>
+                    <button class="btn btn-primary btn-sm" id="btn-add-review-2">+ Add Review</button>
+                </div>
+
+                <div class="review-form-wrap" id="review-form-wrap" style="display: none;">
+                    <form class="review-form" id="review-form" novalidate>
+                        <div class="form-row">
+                            <label>Quality Rating</label>
+                            <div class="star-selector" id="stars-rating" data-rating="rating-value">
+                                <span data-val="1">★</span>
+                                <span data-val="2">★</span>
+                                <span data-val="3">★</span>
+                                <span data-val="4">★</span>
+                                <span data-val="5">★</span>
+                            </div>
+                            <input type="hidden" id="rating-value" name="rating" value="0">
+                            <span class="field-error" id="rating-error"></span>
+                        </div>
+                        <div class="form-row">
+                            <label>Comment</label>
+                            <textarea id="review-comment" name="comment" rows="3" placeholder="Share your experience with this product..."></textarea>
+                            <span class="field-error" id="comment-error"></span>
+                        </div>
+                        <div class="review-form-live" id="review-form-live"></div>
+                        <div class="review-form-actions">
+                            <button type="submit" class="btn btn-primary">Submit Review</button>
+                            <button type="button" class="btn btn-ghost" id="btn-cancel-review">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="reviews-list" id="reviews-list"></div>
+
+                <div class="reviews-empty" id="reviews-empty" style="display: none;">
+                    <p>No reviews yet. Be the first to review this product!</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="similar-section">
+            <div class="similar-inner">
+                <h2 class="similar-title">Similar Products</h2>
+                <div class="similar-carousel" id="similar-carousel"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="img/worth-it-logo-2nd.png" alt="WorthIt" class="footer-logo-img">
+                <p class="footer-tagline">Honest community reviews.<br>Real value insights.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Navigate</h4>
+                    <a href="index.html">Home</a>
+                    <a href="explore.html">Explore</a>
+                    <a href="graph.html">Stats</a>
+                    <a href="add-product.html">Add Product</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="login.html">Login</a>
+                    <a href="register.html">Sign Up</a>
+                    <a href="profile.html">Profile</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <a href="literatura.html">Literature</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026. WorthIt. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script src="scripts/api.js"></script>
-    <script src="scripts/itemDetails.js"></script>
+    <script src="scripts/authGuard.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/item.js"></script>
 </body>
 </html>
