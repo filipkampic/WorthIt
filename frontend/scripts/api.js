@@ -30,5 +30,5 @@ async function del(path) {
 
 function authHeader() {
     const token = localStorage.getItem("token");
-    returntoken ? { Authorization: `Bearer ${token}` } : {};
+    return token ? { Authorization: `Bearer ${token}` } : {};
 }

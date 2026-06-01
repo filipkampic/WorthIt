@@ -19,10 +19,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         const [item, reviews] = await Promise.all([
             get(`/items/${itemId}`),
-            get(`/items/${itemId}/reviews`)
+            get(`/reviews/${itemId}`)
         ]);
 
-        if (item.error) { showError(); return; }
+        if (item.error) { 
+            showError();
+            return; 
+        }
 
         renderItem(item);
         renderReviews(reviews, item);
@@ -229,7 +232,7 @@ function setupReviewForm() {
         submitBtn.disabled = true;
         submitBtn.textContent = "Submitting...";
 
-        const res = await post(`/items/${itemId}/reviews`, { userId, rating, comment });
+        const res = await post(`/reviews/${itemId}`, { userId, rating, comment });
 
         submitBtn.disabled = false;
         submitBtn.textContent = "Submit Review";
