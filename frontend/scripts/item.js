@@ -97,19 +97,6 @@ function renderReviews(reviews, item) {
     }
 
     list.innerHTML = reviews.map(r => reviewCard(r)).join("");
-
-    list.querySelectorAll(".btn-delete-review").forEach(btn => {
-        btn.addEventListener("click", async () => {
-            const rid = btn.dataset.reviewId;
-            if (!userId) return;
-            const res = await del(`/reviews/${rid}`);
-            if (!res.error) {
-                btn.closest(".review-card").remove();
-                const updated = await get(`/items/${itemId}`);
-                if (!updated.error) renderItem(updated);
-            }
-        });
-    });
 }
 
 function reviewCard(r) {
@@ -248,13 +235,6 @@ function setupReviewForm() {
         document.getElementById("reviews-empty").style.display = "none";
         list.insertAdjacentHTML("afterbegin", reviewCard(res));
 
-        list.querySelector(".btn-delete-review")?.addEventListener("click", async (ev) => {
-            const btn = ev.currentTarget;
-            const rid = btn.dataset.reviewId;
-            const delRes = await del(`/reviews/${rid}`);
-            if (!delRes.error) btn.closest(".review-card").remove();
-        });
-
         const updated = await get(`/items/${itemId}`);
         if (!updated.error) renderItem(updated);
 
@@ -263,6 +243,18 @@ function setupReviewForm() {
         document.getElementById("rating-value").value = "0";
         resetStars();
         liveEl.textContent = "";
+    });
+
+    document.getElementById("reviews-list").addEventListener("click", async (e) => {
+        const btn = e.target.closest(".btn-delete-review");
+        if (!btn || !userId) return;
+        const rid = btn.dataset.reviewId;
+        const res = await del(`/reviews/${rid}`, { userId });
+        if (!res.error) {
+            btn.closest(".review-card").remove();
+            const updated = await get(`/items/${itemId}`);
+            if (!updated.error) renderItem(updated);
+        }
     });
 }
 

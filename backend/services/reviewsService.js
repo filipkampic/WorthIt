@@ -72,6 +72,7 @@ async function addReview(itemId, data) {
     const reviewData = {
         itemId,
         userId,
+        username: userDoc.data().username,
         rating: numericRating,
         comment: comment || "",
         createdAt: new Date()

@@ -20,10 +20,14 @@ async function post(path, body) {
     }
 }
 
-async function del(path) {
+async function del(path, body) {
     const res = await fetch(BASE_URL + path, {
         method: "DELETE",
-        headers: authHeader()
+        headers: {
+            "Content-Type": "application/json",
+            ...authHeader()
+        },
+        body: body ? JSON.stringify(body) : undefined
     });
     return res.json();
 }
