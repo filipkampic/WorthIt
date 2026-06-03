@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorthIt - Explore</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/explore.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <img src="img/worth-it-logo.png" alt="WorthIt" class="nav-logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="explore.html" class="nav-link active">Explore</a></li>
+                <li><a href="graph.html" class="nav-link">Stats</a></li>
+                <li><a href="add-product.html" class="nav-link">Add Product</a></li>
+            </ul>
+            <div class="nav-search">
+                <input type="text" id="navbar-search" class="nav-search-input" placeholder="Search products...">
+                <button class="nav-search-btn" onclick="handleNavSearch()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="nav-auth" id="nav-auth"></div>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="explore-main">
+        <div class="explore-inner">
+            <aside class="explore-sidebar" id="explore-sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Categories</h3>
+                    <div class="sidebar-categories" id="sidebar-categories">
+                        <button class="category-btn active" data-category="all">All</button>
+                        <button class="category-btn" data-category="food">Food</button>
+                        <button class="category-btn" data-category="electronics">Electronics</button>
+                        <button class="category-btn" data-category="home">Home</button>
+                        <button class="category-btn" data-category="cosmetics">Cosmetics</button>
+                        <button class="category-btn" data-category="sports">Sports</button>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Price Range</h3>
+                    <div class="price-range-wrap">
+                        <div class="price-range-labels">
+                            <span id="price-min-label">€0</span>
+                            <span id="price-max-label">€1000+</span>
+                        </div>
+                        <input type="range" id="price-min" class="range-input" min="0" max="1000" value="0" step="10">
+                        <input type="range" id="price-max" class="range-input" min="0" max="1000" value="1000" step="10">
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Minimum Rating</h3>
+                    <div class="rating-options" id="rating-options">
+                        <button class="rating-btn active" data-min="0">Any</button>
+                        <button class="rating-btn" data-min="3">3+ ★</button>
+                        <button class="rating-btn" data-min="4">4+ ★</button>
+                        <button class="rating-btn" data-min="4.6">4.5+ ★</button>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="toggle-row">
+                        <label class="toggle-label" for="bargain-toggle">
+                            <span>Bargains only</span>
+                            <span class="toggle-sub">Show only highly-rated deals</span>
+                        </label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="bargain-toggle">
+                            <span class="toggle-track"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Sort By</h3>
+                    <select id="sort-select" class="sort-select">
+                        <option value="default">Most Popular</option>
+                        <option value="rating-desc">Most Highest Rated</option>
+                        <option value="rating-asc">Lowest Rated</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                        <option value="reviews-desc">Most Reviewed</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-outline btn-sm" id="btn-reset-filters">Reset Filters</button>
+            </aside>
+
+            <div class="explore-content">
+                <div class="explore-search-wrap">
+                    <div class="explore-search">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="explore-search-icon">
+                            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                        <input type="text" id="explore-search-input" class="explore-search-input" placeholder="Search products, categories...">
+                        <button class="explore-search-clear hidden" id="explore-search-clear" aria-label="Clear">✕</button>
+                    </div>
+                </div>
+
+                <div class="explore-stats-bar" id="explore-stats-bar">
+                    <div class="stat-pill">
+                        <span class="stat-pill-value" id="stat-total">—</span>
+                        <span class="stat-pill-label">Products</span>
+                    </div>
+                    <div class="stat-pill">
+                        <span class="stat-pill-value" id="stat-trending">—</span>
+                        <span class="stat-pill-label">Trending Category</span>
+                    </div>
+                    <div class="stat-pill">
+                        <span class="stat-pill-value" id="stat-avg-rating">—</span>
+                        <span class="stat-pill-label">Avg Rating</span>
+                    </div>
+                    <div class="stat-pill">
+                        <span class="stat-pill-value" id="stat-showing">—</span>
+                        <span class="stat-pill-label">Showing</span>
+                    </div>
+                </div>
+
+
+                <div class="explore-grid" id="explore-grid"></div>
+
+                <div class="empty-state hidden" id="explore-empty">
+                    <div class="empty-icon">🔍</div>
+                    <h3 class="empty-title">No products found.</h3>
+                    <p class="empty-text">Try adjusting your search or filters.</p>
+                    <button class="btn btn-outline btn-sm" onclick="document.getElementById('btn-reset-filters').click()">Reset Filters</button>
+                </div>
+
+                <div class="loading-state hidden" id="explore-loading">
+                    <div class="spinner"></div>
+                    <p>Loading products...</p>
+                </div>
+
+                <div class="pagination" id="explore-pagination"></div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="img/worth-it-logo-2nd.png" alt="WorthIt" class="footer-logo-img">
+                <p class="footer-tagline">Honest community reviews.<br>Real value insights.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Navigate</h4>
+                    <a href="index.html">Home</a>
+                    <a href="explore.html">Explore</a>
+                    <a href="graph.html">Stats</a>
+                    <a href="add-product.html">Add Product</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="login.html">Login</a>
+                    <a href="register.html">Sign Up</a>
+                    <a href="profile.html">Profile</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <a href="literatura.html">Literature</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026. WorthIt. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/api.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/explore.js"></script>
+</body>
+</html>
