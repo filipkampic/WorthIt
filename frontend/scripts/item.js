@@ -9,7 +9,7 @@ const errorEl = document.getElementById("item-error");
 const mainEl = document.getElementById("item-main");
 
 document.addEventListener("DOMContentLoaded", async () => {
-    updateNavAuth();
+    renderNavAuth();
 
     if (!itemId) {
         showError();
@@ -101,9 +101,7 @@ function renderReviews(reviews, item) {
 
 function reviewCard(r) {
     const stars = renderStars(r.rating);
-    const date = r.createdAt
-        ? new Date(r.createdAt._seconds ? r.createdAt._seconds * 1000 : r.createdAt).toLocaleDateString("en-US")
-        : "";
+    const date = formatDate(r.createdAt);
     const initials = (r.username || "U").charAt(0).toUpperCase();
     const deleteBtn = (userId && r.userId === userId)
         ? `<button class="btn-delete-review" data-review-id="${r.id}" title="Delete review">🗑</button>`
@@ -273,58 +271,13 @@ function setupCTA() {
 }
 
 
-function updateNavAuth() {
-    const navAuth = document.getElementById("nav-auth");
-    if (!navAuth) return;
-    if (userId) {
-        navAuth.innerHTML = `
-            <a href="profile.html" class="btn btn-ghost">${username || "Profile"}</a>
-            <button class="btn btn-primary" onclick="logout()">Logout</button>
-        `;
-    } else {
-        navAuth.innerHTML = `
-            <a href="login.html" class="btn btn-ghost">Login</a>
-            <a href="register.html" class="btn btn-primary">Sign Up</a>
-        `;
-    }
-}
-
-
-function setupNavSearch() {
-    window.handleNavSearch = function () {
-        const q = document.getElementById("navbar-search")?.value.trim();
-        if (q) window.location.href = `explore.html?q=${encodeURIComponent(q)}`;
-    };
-    document.getElementById("navbar-search")?.addEventListener("keydown", e => {
-        if (e.key === "Enter") window.handleNavSearch();
-    });
-}
-
-
 // Helpers
-
-function getStatusClass(status) {
-    if (status === "Bargain") return "bargain";
-    if (status === "Overpriced") return "overpriced";
-    return "worth-it";
-}
 
 function getScoreDesc(status) {
     if (status === "Bargain") return "Most users believe this product offers excellent value for money.";
     if (status === "Overpriced") return "Most users feel this product doesn't justify its price.";
     if (status === "Worth It") return "Most users believe this product offers fair value for its price.";
     return "Not enough reviews yet.";
-}
-
-function capitalize(str) {
-    if (!str) return "";
-    return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-function renderStars(rating) {
-    return [1, 2, 3, 4, 5].map(i =>
-        `<span class="${i <= rating ? 'star filled' : 'star'}">${i <= rating ? '★' : '☆'}</span>`
-    ).join("");
 }
 
 function highlightStars(val) {

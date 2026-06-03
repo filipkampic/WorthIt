@@ -5,7 +5,7 @@ const ITEMS_PER_PAGE = 12;
 
 document.addEventListener("DOMContentLoaded", () => {
     loadItems();
-    setupNavAuth();
+    renderNavAuth();
     setupFilters();
     setupNavSearch();
 });
@@ -202,30 +202,6 @@ function sortItems(items, sort) {
         case "bargain": return [...items].sort((a, b) => (a.status === "Bargain" ? -1 : 1));
         default: return items;
     }
-}
-
-
-function setupNavAuth() {
-    const container = document.getElementById("nav-auth");
-    const userId = localStorage.getItem("userId");
-
-    if (userId) {
-        const username = localStorage.getItem("username") || "Profile";
-        container.innerHTML = `
-            <a href="profile.html" class="btn btn-outline">${username}</a>
-            <button class="btn btn-primary" onclick="handleLogout()">Logout</button>
-        `;
-    } else {
-        container.innerHTML = `
-            <a href="login.html" class="btn btn-outline">Login</a>
-            <a href="register.html" class="btn btn-primary">Sign Up</a>
-        `;
-    }
-}
-
-function handleLogout() {
-    localStorage.clear();
-    window.location.reload();
 }
 
 
