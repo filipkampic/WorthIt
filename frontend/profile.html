@@ -4,12 +4,162 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorthIt - Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/profile.css">
 </head>
 <body>
-    <div id="profile"></div>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <img src="img/worth-it-logo.png" alt="WorthIt" class="nav-logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="explore.html" class="nav-link">Explore</a></li>
+                <li><a href="graph.html" class="nav-link">Stats</a></li>
+                <li><a href="add-product.html" class="nav-link">Add Product</a></li>
+            </ul>
+            <div class="nav-search">
+                <input type="text" id="navbar-search" class="nav-search-input" placeholder="Search products...">
+                <button class="nav-search-btn" onclick="handleNavSearch()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                </button>
+            </div>
+            <div class="nav-auth" id="nav-auth"></div>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="profile-main">
+        <div class="profile-inner">
+            
+            <aside class="profile-sidebar">
+                <div class="profile-avatar" id="profile-avatar"></div>
+                <h2 class="profile-username" id="profile-username">—</h2>
+                <p class="profile-email" id="profile-email">—</p>
+
+                <div class="profile-meta">
+                    <div class="profile-meta-item">
+                        <span class="profile-meta-label">Member since</span>
+                        <span class="profile-meta-value" id="profile-join-date">—</span>
+                    </div>
+                    <div class="profile-meta-item">
+                        <span class="profile-meta-label">Total reviews</span>
+                        <span class="profile-meta-value" id="profile-total-reviews">—</span>
+                    </div>
+                    <div class="profile-meta-item">
+                        <span class="profile-meta-label">Reputation</span>
+                        <span class="profile-meta-value profile-reputation" id="profile-reputation">—</span>
+                    </div>
+                </div>
+
+                <div class="profile-sidebar-nav">
+                    <button class="sidebar-nav-btn active" data-tab="my-reviews">My Reviews</button>
+                    <button class="sidebar-nav-btn" data-tab="added-products">Added Products</button>
+                    <button class="sidebar-nav-btn" data-tab="settings">Settings</button>
+                </div>
+            </aside>
+
+            <section class="profile-content">
+                <div class="tab-panel active" id="tab-my-reviews">
+                    <div class="tab-header">
+                        <h3 class="tab-title">My Reviews</h3>
+                        <span class="tab-count" id="reviews-count">0 reviews</span>
+                    </div>
+
+                    <div class="reviews-list" id="reviews-list"></div>
+
+                    <div id="reviews-empty" class="empty-state hidden">
+                        <p class="empty-icon">📝</p>
+                        <p class="empty-text">You haven't reviewed anything yet.</p>
+                        <a href="explore.html" class="btn btn-primary btn-sm">Explore Products</a>
+                    </div>
+                </div>
+
+                <div class="tab-panel hidden" id="tab-added-products">
+                    <div class="tab-header">
+                        <h3 class="tab-title">Added Products</h3>
+                        <span class="tab-count" id="added-count">0 products</span>
+                    </div>
+
+                    <div class="added-list" id="added-grid"></div>
+
+                    <div id="added-empty" class="empty-state hidden">
+                        <p class="empty-icon">📦</p>
+                        <p class="empty-text">You haven't added any products yet.</p>
+                        <a href="add-product.html" class="btn btn-primary btn-sm">Add a Product</a>
+                    </div>
+                </div>
+
+                 <div class="tab-panel hidden" id="tab-settings">
+                    <div class="tab-header">
+                        <h3 class="tab-title">Settings</h3>
+                    </div>
+                    <div class="settings-card">
+                        <h4 class="settings-section-title">Account</h4>
+                        <div class="settings-row">
+                            <div class="settings-info">
+                                <span class="settings-label">Username</span>
+                                <span class="settings-value" id="settings-username">—</span>
+                            </div>
+                        </div>
+                        <div class="settings-row">
+                            <div class="settings-info">
+                                <span class="settings-label">Email</span>
+                                <span class="settings-value" id="settings-email">—</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-card settings-danger-card">
+                        <h4 class="settings-section-title danger-title">Danger Zone</h4>
+                        <button class="btn btn-danger" id="btn-logout">Log Out</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="img/worth-it-logo-2nd.png" alt="WorthIt" class="footer-logo-img">
+                <p class="footer-tagline">Honest community reviews.<br>Real value insights.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Navigate</h4>
+                    <a href="index.html">Home</a>
+                    <a href="explore.html">Explore</a>
+                    <a href="graph.html">Stats</a>
+                    <a href="add-product.html">Add Product</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="login.html">Login</a>
+                    <a href="register.html">Sign Up</a>
+                    <a href="profile.html">Profile</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <a href="literatura.html">Literature</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026. WorthIt. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script src="scripts/api.js"></script>
+    <script src="scripts/authGuard.js"></script>
+    <script src="scripts/utils.js"></script>
     <script src="scripts/profile.js"></script>
 </body>
 </html>
