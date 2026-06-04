@@ -1,8 +1,11 @@
+/* auth */
 function logout() {
     localStorage.clear();
     window.location.href = "login.html";
 }
 
+
+/* navbar */
 function setupNavSearch() {
     window.handleNavSearch = function () {
         const q = document.getElementById("navbar-search")?.value.trim();
@@ -30,10 +33,10 @@ function renderNavAuth() {
     }
 }
 
-function renderStars(rating) {
-    return Array.from({ length: 5 }, (_, i) =>
-        `<span class="star ${i < rating ? "filled" : ""}">★</span>`
-    ).join("");
+/* formatting */
+function capitalize(str) {
+    if (!str) return "";
+    return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 function formatDate(createdAt) {
@@ -46,13 +49,68 @@ function formatDate(createdAt) {
     });
 }
 
-function capitalize(str) {
-    if (!str) return "";
-    return str.charAt(0).toUpperCase() + str.slice(1);
+function renderStars(rating) {
+    return Array.from({ length: 5 }, (_, i) =>
+        `<span class="star ${i < rating ? "filled" : ""}">★</span>`
+    ).join("");
 }
 
+function getStarsHTML(rating) {
+    const full = Math.round(rating || 0);
+    return "★".repeat(full) + "☆".repeat(5 - full);
+}
+
+
+/* cards */
+function createCardHTML(item) {
+    const badge = getBadgeHTML(item.status);
+    const stars = getStarsHTML(item.avgRating);
+    const image = item.image || "img/placeholder.jpg";
+
+    return `
+        <div class="product-card" data-id="${item.id}">
+            <div class="card-img-wrap">
+                <img src="${image}" alt="${item.name}" class="card-img">
+                <div class="card-category">${capitalize(item.category || "")}</div>
+            </div>
+            <div class="card-body">
+                <h3 class="card-name">${item.name}</h3>
+                <p class="card-price">€${Number(item.price).toFixed(2)}</p>
+                <div class="card-footer">
+                    ${badge}
+                    <span class="card-rating">${stars} ${Number(item.avgRating || 0).toFixed(1)}</span>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+/* status */
 function getStatusClass(status) {
     if (status === "Bargain") return "bargain";
     if (status === "Overpriced") return "overpriced";
     return "worth-it";
+}
+
+/* badges */
+function getBadgeHTML(status) {
+    const map = {
+        "Bargain": { cls: "badge-bargain", label: "Bargain" },
+        "Worth It": { cls: "badge-worth-it", label: "Worth It" },
+        "Overpriced": { cls: "badge-overpriced", label: "Overpriced" },
+    };
+    const b = map[status] || { cls: "badge-worth-it", label: status || "—" };
+    return `<span class="badge ${b.cls}">${b.label}</span>`;
+}
+
+/* sorting */
+function sortItems(items, sort) {
+    switch (sort) {
+        case "rating-desc": return [...items].sort((a, b) => (b.avgRating || 0) - (a.avgRating || 0));
+        case "rating-asc": return [...items].sort((a, b) => (a.avgRating || 0) - (b.avgRating || 0));
+        case "price-asc": return [...items].sort((a, b) => a.price - b.price);
+        case "price-desc": return [...items].sort((a, b) => b.price - a.price);
+        case "reviews-desc": return [...items].sort((a, b) => (b.reviewCount || 0) - (a.reviewCount || 0));
+        default: return items;
+    }
 }

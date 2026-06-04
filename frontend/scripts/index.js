@@ -61,74 +61,23 @@ function renderPagination() {
     const container = document.getElementById("pagination");
     const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
 
-    if (totalPages <= 1) {
-        container.innerHTML = "";
-        return;
+    if (totalPages <= 1) { 
+        container.innerHTML = ""; 
+        return; 
     }
 
-    let html = `
-        <button class="page-btn page-prev" ${currentPage === 1 ? "disabled" : ""} onclick="renderPage(${currentPage - 1})">
-            ← Previous
-        </button>
-    `;
+    let html = `<button class="page-btn" ${currentPage === 1 ? "disabled" : ""} onclick="renderPage(${currentPage - 1})">← Previous</button>`;
 
     for (let i = 1; i <= totalPages; i++) {
-        if (
-            i === 1 ||
-            i === totalPages ||
-            (i >= currentPage - 1 && i <= currentPage + 1)
-        ) {
+        if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
             html += `<button class="page-btn ${i === currentPage ? "active" : ""}" onclick="renderPage(${i})">${i}</button>`;
         } else if (i === currentPage - 2 || i === currentPage + 2) {
             html += `<span class="page-dots">...</span>`;
         }
     }
 
-    html += `
-        <button class="page-btn page-next" ${currentPage === totalPages ? "disabled" : ""} onclick="renderPage(${currentPage + 1})">
-            Next →
-        </button>
-    `;
-
+    html += `<button class="page-btn" ${currentPage === totalPages ? "disabled" : ""} onclick="renderPage(${currentPage + 1})">Next →</button>`;
     container.innerHTML = html;
-}
-
-function createCardHTML(item) {
-    const badge = getBadgeHTML(item.status);
-    const stars = getStarsHTML(item.avgRating);
-    const image = item.image || "img/placeholder.jpg";
-
-    return `
-        <div class="product-card" data-id="${item.id}">
-            <div class="card-img-wrap">
-                <img src="${image}" alt="${item.name}" class="card-img">
-                <div class="card-category">${item.category}</div>
-            </div>
-            <div class="card-body">
-                <h3 class="card-name">${item.name}</h3>
-                <p class="card-price">€${Number(item.price).toFixed(2)}</p>
-                <div class="card-footer">
-                    ${badge}
-                    <span class="card-rating">${stars} ${Number(item.avgRating || 0).toFixed(1)}</span>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-function getBadgeHTML(status) {
-    const map = {
-        "Bargain": { cls: "badge-bargain", label: "Bargain" },
-        "Worth It": { cls: "badge-worth-it", label: "Worth It" },
-        "Overpriced": { cls: "badge-overpriced", label: "Overpriced" },
-    };
-    const b = map[status] || { clas: "badge-worth-it", label: status || "—" };
-    return `<span class="badge ${b.cls}">${b.label}</span>`;
-}
-
-function getStarsHTML(rating) {
-    const full = Math.round(rating || 0);
-    return "★".repeat(full) + "☆".repeat(5 - full);
 }
 
 
@@ -191,17 +140,6 @@ function applyFilters() {
 
     filteredItems = sortItems(filtered, sort);
     renderPage(1);
-}
-
-function sortItems(items, sort) {
-    switch (sort) {
-        case "rating-desc": return [...items].sort((a, b) => (b.avgRating || 0) - (a.avgRating || 0));
-        case "rating-asc": return [...items].sort((a, b) => (a.avgRating || 0) - (b.avgRating || 0));
-        case "price-asc": return [...items].sort((a, b) => a.price - b.price);
-        case "price-desc": return [...items].sort((a, b) => b.price - a.price);
-        case "bargain": return [...items].sort((a, b) => (a.status === "Bargain" ? -1 : 1));
-        default: return items;
-    }
 }
 
 
