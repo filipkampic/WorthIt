@@ -18,3 +18,12 @@ exports.getItemById = async (req, res) => {
         return res.status(404).json({ error: err.message });
     }
 };
+
+exports.addItem = async (req, res) => {
+    try {
+        const item = await itemsService.addItem(req.body);
+        return res.status(201).json(item);
+    } catch (err) {
+        return res.status(400).json({ error: err.message });
+    }
+}

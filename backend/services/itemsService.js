@@ -50,7 +50,49 @@ async function getItemById(id) {
     return { id: doc.id, ...doc.data(), ...calcDerivedFields(reviews) };
 }
 
+async function addItem(data) {
+    const { name, brand, category, price, image, description, purchaseLink } = data;
+
+    if (!name || !brand || !category || !price || !description) {
+        throw new Error("Missing required fields.");
+    }
+
+    const validCategories = ["food", "tech", "gaming", "fashion", "home", "wellness", "sports", "other"];
+    if (!validCategories.includes(category)) {
+        throw new Error("Invalid category.");
+    }
+
+    const parsedPrice = parseFloat(price);
+    if (isNaN(parsedPrice) || parsedPrice < 0) {
+        throw new Error("Invalid price.");
+    }
+
+    const docRef = await db.collection("items").add({
+        name: name.trim(),
+        brand: brand.trim(),
+        category,
+        price: parsedPrice,
+        image: image || "",
+        description: description.trim(),
+        purchaseLink: purchaseLink || "",
+        createdAt: new Date().toISOString()
+    });
+
+    return {
+        id: docRef.id,
+        name: name.trim(),
+        brand: brand.trim(),
+        category,
+        price: parsedPrice,
+        image: image || "",
+        description: description.trim(),
+        purchaseLink: purchaseLink || "",
+        createdAt: new Date().toISOString()
+    };
+}
+
 module.exports = {
     getAllItems,
-    getItemById
+    getItemById,
+    addItem
 };
