@@ -18,7 +18,7 @@ async function init() {
     renderSidebar(profile, stats);
     renderSettingsTab(profile);
     await renderReviewsTab(profile.reviews);
-    renderAddedTab();
+    await renderAddedTab();
 }
 
 function renderSidebar(profile, stats) {
@@ -28,6 +28,7 @@ function renderSidebar(profile, stats) {
     document.getElementById("profile-username").textContent = profile.username || "—";
     document.getElementById("profile-email").textContent = profile.email || "—";
     document.getElementById("profile-total-reviews").textContent = stats.totalReviews ?? 0;
+    document.getElementById("profile-total-products").textContent = stats.totalProducts ?? 0;
     document.getElementById("profile-join-date").textContent = "2026";
 
     const rep = calcReputation(stats.totalReviews);
@@ -143,10 +144,45 @@ async function handleDeleteReview(e) {
     }
 }
 
-function renderAddedTab() {
-    // to-do
-    document.getElementById("added-empty").classList.remove("hidden");
-    document.getElementById("added-count").textContent = "0 products";
+async function renderAddedTab() {
+    const grid = document.getElementById("added-grid");
+    const empty = document.getElementById("added-empty");
+    const count = document.getElementById("added-count");
+
+    count.textContent = "Loading...";
+    grid.innerHTML = `<div class="loading-state"><div class="spinner"></div></div>`;
+    empty.classList.add("hidden");
+
+    const items = await get("/items");
+
+    grid.innerHTML = "";
+
+    if (items.error) {
+        empty.classList.remove("hidden");
+        count.textContent = "0 products";
+        return;
+    }
+
+    const myItems = items.filter(i => i.createdBy === userId);
+
+    if (!myItems.length) {
+        empty.classList.remove("hidden");
+        count.textContent = "0 products";
+        return;
+    }
+
+    count.textContent = `${myItems.length} product${myItems.length !== 1 ? "s" : ""}`;
+    empty.classList.add("hidden");
+
+    grid.innerHTML = myItems.map(item => `
+        <a href="item.html?id=${item.id}" class="added-product-card">
+            <img src="${item.image || 'img/placeholder.png'}" alt="${item.name}" class="added-product-img">
+            <div class="added-product-body">
+                <p class="added-product-name">${item.name}</p>
+                <span class="added-product-price">€${Number(item.price).toFixed(2)}</span>
+            </div>
+        </a>
+    `).join("");
 }
 
 function renderSettingsTab(profile) {

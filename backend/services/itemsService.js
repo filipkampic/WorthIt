@@ -51,9 +51,9 @@ async function getItemById(id) {
 }
 
 async function addItem(data) {
-    const { name, brand, category, price, image, description, purchaseLink } = data;
+    const { name, category, price, image, description } = data;
 
-    if (!name || !brand || !category || !price || !description) {
+    if (!name || !category || !price || !description) {
         throw new Error("Missing required fields.");
     }
 
@@ -69,25 +69,25 @@ async function addItem(data) {
 
     const docRef = await db.collection("items").add({
         name: name.trim(),
-        brand: brand.trim(),
         category,
         price: parsedPrice,
         image: image || "",
         description: description.trim(),
-        purchaseLink: purchaseLink || "",
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
+        createdBy: data.userId || null,
+        createdByUsername: data.username || null
     });
 
     return {
         id: docRef.id,
         name: name.trim(),
-        brand: brand.trim(),
         category,
         price: parsedPrice,
         image: image || "",
         description: description.trim(),
-        purchaseLink: purchaseLink || "",
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
+        createdBy: data.userId || null,
+        createdByUsername: data.username || null
     };
 }
 

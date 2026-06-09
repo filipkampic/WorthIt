@@ -47,6 +47,13 @@ async function getProfileStats(userId) {
 
     const reviews = snapshot.docs.map(doc => doc.data());
 
+    const itemsSnapshot = await db
+        .collection("items")
+        .where("createdBy", "==", userId)
+        .get();
+
+    const totalProducts = itemsSnapshot.size;
+
     const count = reviews.length;
 
     const avgRating = 
@@ -60,7 +67,8 @@ async function getProfileStats(userId) {
         userId,
         totalReviews: count,
         averageRating: avgRating,
-        itemsReviewed: uniqueItems
+        itemsReviewed: uniqueItems,
+        totalProducts
     };
 }
 

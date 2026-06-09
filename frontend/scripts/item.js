@@ -85,6 +85,11 @@ function renderItem(item) {
     document.getElementById("metric-rating").textContent = item.avgRating > 0 ? item.avgRating.toFixed(1) :  "—";
     document.getElementById("metric-worth-score").textContent = score > 0 ? score.toFixed(1) :  "—";
     document.getElementById("metric-review-count").textContent = item.reviewCount ?? 0;
+
+    const addedByEl = document.getElementById("product-added-by");
+    if (item.createdByUsername) {
+        addedByEl.textContent = `Added by @${item.createdByUsername}`;
+    }
 }
 
 function renderReviews(reviews, item) {
