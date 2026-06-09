@@ -17,7 +17,12 @@ async function init() {
     document.getElementById("profile-loading").style.display = "none";
     document.getElementById("profile-inner").style.display = "grid";
 
-    if (profile.error || stats.error) return;
+    if (profile.error || stats.error) {
+        document.getElementById("profile-inner").innerHTML = `
+            <p class="error-msg">Failed to load profile. Make sure the server is running.</p>
+        `;
+        return;
+    }
 
     renderSidebar(profile, stats);
     renderSettingsTab(profile);

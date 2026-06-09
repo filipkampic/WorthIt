@@ -1,10 +1,14 @@
 const BASE_URL = "http://localhost:3000";
 
 async function get(path) {
-    const res = await fetch(BASE_URL + path, {
-        headers: authHeader()
-    });
-    return res.json();
+    try {
+        const res = await fetch(BASE_URL + path, {
+            headers: authHeader()
+        });
+        return res.json();
+    } catch (err) {
+        return { error: "Network error. Please try again." };
+    }
 }
 
 async function post(path, body) {
@@ -21,15 +25,19 @@ async function post(path, body) {
 }
 
 async function del(path, body) {
-    const res = await fetch(BASE_URL + path, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-            ...authHeader()
-        },
-        body: body ? JSON.stringify(body) : undefined
-    });
-    return res.json();
+    try {
+        const res = await fetch(BASE_URL + path, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                ...authHeader()
+            },
+            body: body ? JSON.stringify(body) : undefined
+        });
+        return res.json();
+    } catch (err) {
+        return { error: "Network error. Please try again." };
+    }
 }
 
 function authHeader() {

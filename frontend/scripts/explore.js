@@ -37,7 +37,7 @@ async function loadItems() {
         applyFilters();
     } catch (err) {
         showLoading(false);
-        document.getElementById("explore-grid").innerHTML = `<p class="error-msg">Failed to load products. Please try again.</p>`;
+        document.getElementById("explore-grid").innerHTML = `<p class="error-msg">Failed to load products. Make sure the server is running.</p>`;
     }
 }
 
