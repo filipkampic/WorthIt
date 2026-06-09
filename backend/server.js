@@ -9,11 +9,13 @@ const authRoutes = require("./routes/authRoutes");
 const itemsRoutes = require("./routes/itemsRoutes");
 const reviewsRoutes = require("./routes/reviewsRoutes");
 const profileRoutes = require("./routes/profileRoutes");
+const savedRoutes = require("./routes/savedRoutes");
 
 app.use("/auth", authRoutes);
 app.use("/items", itemsRoutes);
 app.use("/reviews", reviewsRoutes);
 app.use("/profile", profileRoutes);
+app.use("/saved", savedRoutes);
 
 app.get("/", (req, res) => {
     res.send("WorthIt backend radi!");

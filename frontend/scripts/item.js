@@ -262,10 +262,27 @@ function setupReviewForm() {
 }
 
 
-function setupCTA() {
-    document.getElementById("btn-save")?.addEventListener("click", () => {
+async function setupCTA() {
+    const saveBtn = document.getElementById("btn-save");
+
+    if (userId) {
+        const saved = await get(`/saved/${userId}`);
+        const isSaved = !saved.error && saved.some(i => i.id === itemId);
+        updateSaveBtn(saveBtn, isSaved);
+    }
+
+    saveBtn?.addEventListener("click", async () => {
         if (!userId) { window.location.href = "login.html"; return; }
-        alert("Save feature coming soon!");
+
+        const isSaved = saveBtn.dataset.saved === "true";
+
+        if (isSaved) {
+            const res = await del(`/saved/${itemId}`, { userId });
+            if (!res.error) updateSaveBtn(saveBtn, false);
+        } else {
+            const res = await post(`/saved/${itemId}`, { userId });
+            if (!res.error) updateSaveBtn(saveBtn, true);
+        }
     });
 
     document.getElementById("btn-share")?.addEventListener("click", () => {
@@ -273,6 +290,12 @@ function setupCTA() {
             .then(() => alert("Link copied to clipboard!"))
             .catch(() => alert("Copy failed."));
     });
+}
+
+function updateSaveBtn(btn, isSaved) {
+    btn.dataset.saved = isSaved;
+    btn.textContent = isSaved ? "Saved" : "Save Product";
+    btn.classList.toggle("btn-saved", isSaved);
 }
 
 

@@ -282,6 +282,12 @@
     flex-wrap: wrap;
 }
 
+.btn-saved {
+    background: #ECFDF5;
+    color: #16A34A;
+    border-color: #16A34A;
+}
+
 /* metrics */
 .metrics-section {
     padding: 2.5rem 2rem;

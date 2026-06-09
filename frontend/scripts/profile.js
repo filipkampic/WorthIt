@@ -19,6 +19,7 @@ async function init() {
     renderSettingsTab(profile);
     await renderReviewsTab(profile.reviews);
     await renderAddedTab();
+    await renderSavedTab();
 }
 
 function renderSidebar(profile, stats) {
@@ -175,6 +176,38 @@ async function renderAddedTab() {
     empty.classList.add("hidden");
 
     grid.innerHTML = myItems.map(item => `
+        <a href="item.html?id=${item.id}" class="added-product-card">
+            <img src="${item.image || 'img/placeholder.png'}" alt="${item.name}" class="added-product-img">
+            <div class="added-product-body">
+                <p class="added-product-name">${item.name}</p>
+                <span class="added-product-price">€${Number(item.price).toFixed(2)}</span>
+            </div>
+        </a>
+    `).join("");
+}
+
+async function renderSavedTab() {
+    const grid = document.getElementById("saved-grid");
+    const empty = document.getElementById("saved-empty");
+    const count = document.getElementById("saved-count");
+
+    count.textContent = "Loading...";
+    grid.innerHTML = `<div class="loading-state"><div class="spinner"></div></div>`;
+    empty.classList.add("hidden");
+
+    const items = await get(`/saved/${userId}`);
+    grid.innerHTML = "";
+
+    if (items.error || !items.length) {
+        empty.classList.remove("hidden");
+        count.textContent = "0 products";
+        return;
+    }
+
+    count.textContent = `${items.length} product${items.length !== 1 ? "s" : ""}`;
+    empty.classList.add("hidden");
+
+    grid.innerHTML = items.map(item => `
         <a href="item.html?id=${item.id}" class="added-product-card">
             <img src="${item.image || 'img/placeholder.png'}" alt="${item.name}" class="added-product-img">
             <div class="added-product-body">

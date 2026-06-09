@@ -66,6 +66,7 @@
                 <div class="profile-sidebar-nav">
                     <button class="sidebar-nav-btn active" data-tab="my-reviews">My Reviews</button>
                     <button class="sidebar-nav-btn" data-tab="added-products">Added Products</button>
+                    <button class="sidebar-nav-btn" data-tab="saved-products">Saved Products</button>
                     <button class="sidebar-nav-btn" data-tab="settings">Settings</button>
                 </div>
             </aside>
@@ -98,6 +99,19 @@
                         <p class="empty-icon">📦</p>
                         <p class="empty-text">You haven't added any products yet.</p>
                         <a href="add-product.html" class="btn btn-primary btn-sm">Add a Product</a>
+                    </div>
+                </div>
+
+                <div class="tab-panel hidden" id="tab-saved-products">
+                    <div class="tab-header">
+                        <h3 class="tab-title">Saved Products</h3>
+                        <span class="tab-count" id="saved-count">0 products</span>
+                    </div>
+                    <div class="added-list" id="saved-grid"></div>
+                    <div id="saved-empty" class="empty-state hidden">
+                        <p class="empty-icon">🔖</p>
+                        <p class="empty-text">You haven't saved any products yet.</p>
+                        <a href="explore.html" class="btn btn-primary btn-sm">Explore Products</a>
                     </div>
                 </div>
 
