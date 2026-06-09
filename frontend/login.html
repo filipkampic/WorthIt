@@ -12,23 +12,57 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-    <h1>Login</h1>
-
-    <form id="loginForm">
-        <input type="email" id="loginEmail" placeholder="Email" required>
-
-        <div class="password-wrapper">
-            <input type="password" id="loginPassword" placeholder="Password" required>
-            <button type="button" class="toggle-password" data-target="loginPassword"><i class="fa-solid fa-eye"></i></button>
+    <div class="auth-layout">
+        <div class="auth-brand">
+            <a href="index.html">
+                <img src="img/worth-it-logo-2nd.png" alt="WorthIt" class="auth-brand-logo">
+            </a>
+            <h2 class="auth-brand-title">Find out if it's actually worth it.</h2>
+            <p class="auth-brand-sub">Community-powered reviews that tell you the real value behind every price tag.</p>
+            <ul class="auth-brand-features">
+                <li>Honest ratings from real users</li>
+                <li>Browse products across all categories</li>
+                <li>See if something is a bargain or overpriced</li>
+            </ul>
         </div>
 
-        <button type="submit">Login</button>
+        <div class="auth-form-side">
+            <div class="auth-form-card">
+                <div class="auth-form-header">
+                    <h1 class="auth-title">Welcome back</h1>
+                    <p class="auth-subtitle">Sign in to your WorthIt account</p>
+                </div>
 
-        <div id="loginError"></div>
-    </form>
+                <form id="loginForm" novalidate>
+                    <div class="auth-field">
+                        <label class="auth-label" for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" class="auth-input" required>
+                        <span class="auth-field-error hidden" id="email-error"></span>
+                    </div>
 
-    <p>Don't have an account? <a href="register.html">Register</a></p>
+                    <div class="auth-field">
+                        <label class="auth-label" for="loginPassword">Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="loginPassword" class="auth-input" required>
+                            <button type="button" class="toggle-password" data-target="loginPassword">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="auth-field-error hidden" id="password-error"></span>
+                    </div>
 
+                    <div class="auth-error hidden" id="loginError"></div>
+
+                    <button type="submit" class="auth-submit" id="login-btn">
+                        <span id="login-btn-text">Sign In</span>
+                        <span class="spinner hidden" id="login-spinner"></span>
+                    </button>
+                </form>
+
+                <p class="auth-switch">Don't have an account? <a href="register.html">Create one</a></p>
+            </div>
+        </div>
+    </div>
     <script src="scripts/api.js"></script>
     <script src="scripts/login.js"></script>
 </body>

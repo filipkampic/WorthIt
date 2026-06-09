@@ -12,32 +12,75 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-    <h1>Register</h1>
-
-    <form id="registerForm">
-        <input type="text" id="regUsername" placeholder="Username" required>
-
-        <input type="email" id="regEmail" placeholder="Email" required>
-
-        <div class="password-wrapper">
-            <input type="password" id="regPassword" placeholder="Password" required>
-            <button type="button" class="toggle-password" data-target="regPassword"><i class="fa-solid fa-eye"></i></button>
+    <div class="auth-layout">
+        <div class="auth-brand">
+            <a href="index.html">
+                <img src="img/worth-it-logo-2nd.png" alt="WorthIt" class="auth-brand-logo">
+            </a>
+            <h2 class="auth-brand-title">Find out if it's actually worth it.</h2>
+            <p class="auth-brand-sub">Community-powered reviews that tell you the real value behind every price tag.</p>
+            <ul class="auth-brand-features">
+                <li>Honest ratings from real users</li>
+                <li>Browse products across all categories</li>
+                <li>See if something is a bargain or overpriced</li>
+            </ul>
         </div>
 
-        <div id="passwordStrength"></div>
+        <div class="auth-form-side">
+            <div class="auth-form-card">
+                <div class="auth-form-header">
+                    <h1 class="auth-title">Create account</h1>
+                    <p class="auth-subtitle">Start rating products for free</p>
+                </div>
 
-        <div class="password-wrapper">
-            <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required>
-            <button type="button" class="toggle-password" data-target="regConfirmPassword"><i class="fa-solid fa-eye"></i></button>
+                <form id="registerForm" novalidate>
+                    <div class="auth-field">
+                        <label class="auth-label" for="regUsername">Username</label>
+                        <input type="text" id="regUsername" class="auth-input" required>
+                        <span class="auth-field-error hidden" id="username-error"></span>
+                    </div>
+
+                    <div class="auth-field">
+                        <label class="auth-label" for="regEmail">Email</label>
+                        <input type="email" id="regEmail" class="auth-input" required>
+                        <span class="auth-field-error hidden" id="email-error"></span>
+                    </div>
+
+                    <div class="auth-field">
+                        <label class="auth-label" for="regPassword">Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="regPassword" class="auth-input" required>
+                            <button type="button" class="toggle-password" data-target="regPassword">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                        <div id="passwordStrength"></div>
+                        <span class="auth-field-error hidden" id="password-error"></span>
+                    </div>
+
+                    <div class="auth-field">
+                        <label class="auth-label" for="regConfirmPassword">Confirm Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="regConfirmPassword" class="auth-input" required>
+                            <button type="button" class="toggle-password" data-target="regConfirmPassword">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="auth-field-error hidden" id="confirm-error"></span>
+                    </div>
+
+                    <div class="auth-error hidden" id="registerError"></div>
+
+                    <button type="submit" class="auth-submit" id="register-btn">
+                        <span id="register-btn-text">Create Account</span>
+                        <span class="spinner hidden" id="register-spinner"></span>
+                    </button>
+                </form>
+
+                <p class="auth-switch">Already have an account? <a href="login.html">Sign in</a></p>
+            </div>
         </div>
-
-        <button type="submit">Register</button>
-        
-        <div id="registerError"></div>
-    </form>
-
-    <p>Already have an account? <a href="login.html">Log in</a></p>
-
+    </div>
     <script src="scripts/api.js"></script>
     <script src="scripts/register.js"></script>
 </body>
