@@ -21,17 +21,17 @@ function calcDerivedFields(reviews) {
 }
 
 async function getAllItems() {
-    const snapshot = await db.collection("items").get();
+    const [itemsSnap, reviewsSnap] = await Promise.all([
+        db.collection("items").get(),
+        db.collection("reviews").get()
+    ]);
 
-    const items = [];
+    const allReviews = reviewsSnap.docs.map(d => ({ id: d.id, ...d.data() }));
 
-    for (const doc of snapshot.docs) {
-        const reviewsSnap = await db.collection("reviews").where("itemId", "==", doc.id).get();
-        const reviews = reviewsSnap.docs.map(r => r.data());
-        items.push({ id: doc.id, ...doc.data(), ...calcDerivedFields(reviews) });
-    }
-
-    return items;
+    return itemsSnap.docs.map(doc => {
+        const reviews = allReviews.filter(r => r.itemId === doc.id);
+        return { id: doc.id, ...doc.data(), ...calcDerivedFields(reviews) };
+    });
 }
 
 async function getItemById(id) {
