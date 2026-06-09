@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/profile.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -81,7 +82,7 @@
                     <div class="reviews-list" id="reviews-list"></div>
 
                     <div id="reviews-empty" class="empty-state hidden">
-                        <p class="empty-icon">📝</p>
+                        <i data-lucide="file-text"></i>
                         <p class="empty-text">You haven't reviewed anything yet.</p>
                         <a href="explore.html" class="btn btn-primary btn-sm">Explore Products</a>
                     </div>
@@ -96,7 +97,7 @@
                     <div class="added-list" id="added-grid"></div>
 
                     <div id="added-empty" class="empty-state hidden">
-                        <p class="empty-icon">📦</p>
+                        <i data-lucide="package"></i>
                         <p class="empty-text">You haven't added any products yet.</p>
                         <a href="add-product.html" class="btn btn-primary btn-sm">Add a Product</a>
                     </div>
@@ -109,7 +110,7 @@
                     </div>
                     <div class="added-list" id="saved-grid"></div>
                     <div id="saved-empty" class="empty-state hidden">
-                        <p class="empty-icon">🔖</p>
+                        <i data-lucide="bookmark"></i>
                         <p class="empty-text">You haven't saved any products yet.</p>
                         <a href="explore.html" class="btn btn-primary btn-sm">Explore Products</a>
                     </div>
@@ -177,5 +178,6 @@
     <script src="scripts/authGuard.js"></script>
     <script src="scripts/utils.js"></script>
     <script src="scripts/profile.js"></script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>

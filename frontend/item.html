@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/item.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -103,19 +104,19 @@
         <section class="metrics-section">
             <div class="metrics-inner">
                 <div class="metric-card">
-                    <span class="metric-icon">⭐</span>
+                    <span class="metric-icon"><i data-lucide="star"></i></span>
                     <span class="metric-value" id="metric-rating">—</span>
                     <span class="metric-label">Quality Rating</span>
                     <span class="metric-sub">out of 5</span>
                 </div>
                 <div class="metric-card">
-                    <span class="metric-icon">💰</span>
+                    <span class="metric-icon"><i data-lucide="dollar-sign"></i></span>
                     <span class="metric-value" id="metric-worth-score">—</span>
                     <span class="metric-label">Worth Score</span>
                     <span class="metric-sub">out of 10</span>
                 </div>
                 <div class="metric-card">
-                    <span class="metric-icon">👥</span>
+                    <span class="metric-icon"><i data-lucide="users"></i></span>
                     <span class="metric-value" id="metric-review-count">—</span>
                     <span class="metric-label">Community Reviews</span>
                     <span class="metric-sub">total ratings</span>
@@ -207,5 +208,6 @@
     <script src="scripts/authGuard.js"></script>
     <script src="scripts/utils.js"></script>
     <script src="scripts/item.js"></script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>

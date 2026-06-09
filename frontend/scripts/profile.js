@@ -18,6 +18,7 @@ async function init() {
     renderSidebar(profile, stats);
     renderSettingsTab(profile);
     await renderReviewsTab(profile.reviews);
+    lucide.createIcons();
     await renderAddedTab();
     await renderSavedTab();
 }
@@ -79,6 +80,7 @@ async function renderReviewsTab(reviews) {
         })
         .join("");
 
+    lucide.createIcons();
     list.addEventListener("click", handleDeleteReview);
 }
 
@@ -109,7 +111,7 @@ function renderReviewCard(review, item) {
                         class="btn-delete-review"
                         data-review-id="${review.id}"
                         title="Delete review"
-                    >🗑️</button>
+                    ><i data-lucide="trash-2"></i></button>
                 </div>
             </div>
             <div class="profile-review-stars">${stars}</div>

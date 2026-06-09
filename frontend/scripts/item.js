@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         renderItem(item);
         renderReviews(reviews, item);
+        lucide.createIcons();
         renderSimilar(item.category, item.id);
 
         showMain();
@@ -109,7 +110,9 @@ function reviewCard(r) {
     const date = formatDate(r.createdAt);
     const initials = (r.username || "U").charAt(0).toUpperCase();
     const deleteBtn = (userId && r.userId === userId)
-        ? `<button class="btn-delete-review" data-review-id="${r.id}" title="Delete review">🗑</button>`
+        ? `<button class="btn-delete-review" data-review-id="${r.id}" title="Delete review">
+                <i data-lucide="trash-2"></i>
+            </button>`
         : "";
 
     return `
@@ -237,6 +240,7 @@ function setupReviewForm() {
         const list = document.getElementById("reviews-list");
         document.getElementById("reviews-empty").style.display = "none";
         list.insertAdjacentHTML("afterbegin", reviewCard(res));
+        lucide.createIcons();
 
         const updated = await get(`/items/${itemId}`);
         if (!updated.error) renderItem(updated);
