@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupNavSearch();
     setupEventListeners();
     loadItems();
+    renderFooterAuth();
 });
 
 async function loadItems() {

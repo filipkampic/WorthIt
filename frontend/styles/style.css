@@ -500,6 +500,12 @@ a:hover {
     pointer-events: none;
 }
 
+#footer-account-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
 @media (max-width: 768px) {
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }

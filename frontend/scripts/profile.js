@@ -7,6 +7,7 @@ async function init() {
     setupTabs();
     setupLogout();
     setupNavSearch();
+    renderFooterAuth();
 
     const [profile, stats] = await Promise.all([
         get(`/profile/${userId}`),

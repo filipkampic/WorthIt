@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     setupReviewForm();
     setupCTA();
     setupNavSearch();
+    renderFooterAuth();
 });
 
 function showMain() {

@@ -123,3 +123,20 @@ function sortItems(items, sort) {
         default: return items;
     }
 }
+
+
+/* footer */
+function renderFooterAuth() {
+    const userId = localStorage.getItem("userId");
+    const footerAccount = document.getElementById("footer-account-links");
+    if (!footerAccount) return;
+
+    if (userId) {
+        footerAccount.innerHTML = `<a href="profile.html">Profile</a>`;
+    } else {
+        footerAccount.innerHTML = `
+            <a href="login.html">Login</a>
+            <a href="register.html">Sign Up</a>
+        `;
+    }
+}

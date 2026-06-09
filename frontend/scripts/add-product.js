@@ -2,6 +2,7 @@ requireLogin();
 
 renderNavAuth();
 setupNavSearch();
+renderFooterAuth();
 
 const form = document.getElementById("add-product-form");
 const imageUrlInput = document.getElementById("image-url");

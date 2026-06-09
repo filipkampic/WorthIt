@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderNavAuth();
     setupFilters();
     setupNavSearch();
+    renderFooterAuth();
 });
 
 async function loadItems() {
