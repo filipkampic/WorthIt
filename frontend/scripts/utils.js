@@ -40,6 +40,17 @@ function renderNavAuth() {
             <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
         `;
     }
+    setupHamburger();
+}
+
+function setupHamburger() {
+    const btn = document.getElementById("nav-hamburger");
+    const links = document.querySelector(".nav-links");
+    if (!btn || !links) return;
+
+    btn.addEventListener("click", () => {
+        links.classList.toggle("nav-open");
+    });
 }
 
 /* formatting */

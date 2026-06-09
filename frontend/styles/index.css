@@ -271,7 +271,26 @@
     }
 
     .filter-inner {
+        flex-direction: column;
+        align-items: stretch;
         gap: 0.75rem;
+    }
+
+    .filter-search {
+        width: 100%;
+    }
+
+    .filter-search-input {
+        width: 100%;
+    }
+
+    .filter-categories {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .filter-sort {
+        width: 100%;
     }
 }
 

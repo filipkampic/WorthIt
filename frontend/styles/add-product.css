@@ -241,7 +241,7 @@
     }
 
     .upload-area {
-        aspect-ratio: 16 / 9;
+        display: none;
     }
 }
 
