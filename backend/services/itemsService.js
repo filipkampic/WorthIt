@@ -2,10 +2,9 @@ const { db } = require("../config/firebase");
 
 function calcDerivedFields(reviews) {
     const count = reviews.length;
-    if (count === 0) return { avgRating: 0, worthScore: 0, status: "Unrated", reviewCount: 0 };
+    if (count === 0) return { avgRating: 0, status: "Unrated", reviewCount: 0 };
 
     const avgRating = reviews.reduce((s, r) => s + r.rating, 0) / count;
-    const worthScore = Math.round(avgRating * 2 * 10) / 10;
 
     let status;
     if (avgRating >= 4) status = "Bargain";
@@ -14,7 +13,6 @@ function calcDerivedFields(reviews) {
 
     return { 
         avgRating: Math.round(avgRating * 10) / 10, 
-        worthScore, 
         status, 
         reviewCount: count 
     };

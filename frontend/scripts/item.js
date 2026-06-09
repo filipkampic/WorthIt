@@ -76,14 +76,13 @@ function renderItem(item) {
     badge.textContent = item.status || "Unrated";
     badge.className = `status-badge ${getStatusClass(item.status)}`;
 
-    const score = item.worthScore ?? 0;
+    const score = item.avgRating ?? 0;
     document.getElementById("worth-score").textContent = score > 0 ? score.toFixed(1) : "—";
     document.getElementById("worth-score-desc").textContent = getScoreDesc(item.status);
     const bar = document.getElementById("worth-score-bar");
-    bar.style.width = score > 0 ? `${score * 10}%` : "0%";
+    bar.style.width = score > 0 ? `${score * 20}%` : "0%";
     bar.className = `worth-score-bar ${getStatusClass(item.status)}`;
 
-    document.getElementById("metric-rating").textContent = item.avgRating > 0 ? item.avgRating.toFixed(1) :  "—";
     document.getElementById("metric-worth-score").textContent = score > 0 ? score.toFixed(1) :  "—";
     document.getElementById("metric-review-count").textContent = item.reviewCount ?? 0;
 
@@ -151,7 +150,7 @@ async function renderSimilar(category, currentId) {
 }
 
 function similarCard(item) {
-    const score = item.worthScore ?? 0;
+    const score = item.avgRating ?? 0;
     return `
         <a href="item.html?id=${item.id}" class="similar-card">
             <img src="${item.image || 'img/placeholder.png'}" alt="${item.name}" class="similar-card-img">

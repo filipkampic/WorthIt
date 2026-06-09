@@ -297,8 +297,8 @@
 .metrics-inner {
     max-width: 1280px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    justify-content: center;
     gap: 1.5rem;
 }
 
@@ -312,6 +312,7 @@
     align-items: center;
     gap: 0.4rem;
     text-align: center;
+    flex: 0 1 320px;
 }
 
 .metric-icon {
@@ -666,7 +667,8 @@
     }
 
     .metrics-inner {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: center;
     }
 
     .product-cta {
