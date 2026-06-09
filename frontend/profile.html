@@ -38,7 +38,11 @@
     </nav>
 
     <main class="profile-main">
-        <div class="profile-inner">
+        <div id="profile-loading" class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading profile...</p>
+        </div>
+        <div class="profile-inner" id="profile-inner" style="display: none;">
             
             <aside class="profile-sidebar">
                 <div class="profile-avatar" id="profile-avatar"></div>

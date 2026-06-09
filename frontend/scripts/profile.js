@@ -13,6 +13,9 @@ async function init() {
         get(`/profile/${userId}/stats`)
     ]);
 
+    document.getElementById("profile-loading").style.display = "none";
+    document.getElementById("profile-inner").style.display = "grid";
+
     if (profile.error || stats.error) return;
 
     renderSidebar(profile, stats);
