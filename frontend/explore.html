@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/explore.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -138,7 +139,7 @@
                 <div class="explore-grid" id="explore-grid"></div>
 
                 <div class="empty-state hidden" id="explore-empty">
-                    <div class="empty-icon">🔍</div>
+                    <i data-lucide="search-x"></i>
                     <h3 class="empty-title">No products found.</h3>
                     <p class="empty-text">Try adjusting your search or filters.</p>
                     <button class="btn btn-outline btn-sm" onclick="document.getElementById('btn-reset-filters').click()">Reset Filters</button>
@@ -189,5 +190,6 @@
     <script src="scripts/api.js"></script>
     <script src="scripts/utils.js"></script>
     <script src="scripts/explore.js"></script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>

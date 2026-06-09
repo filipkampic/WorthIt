@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupEventListeners();
     loadItems();
     renderFooterAuth();
+    lucide.createIcons();
 });
 
 async function loadItems() {

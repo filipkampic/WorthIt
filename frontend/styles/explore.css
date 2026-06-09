@@ -279,6 +279,10 @@
     color: var(--text);
 }
 
+#explore-empty .btn {
+    margin-top: 0.5rem;
+}
+
 /* stats bar */
 .explore-stats-bar {
     display: flex;
