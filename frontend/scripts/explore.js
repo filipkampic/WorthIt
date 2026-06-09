@@ -15,6 +15,7 @@ const filters = {
 
 document.addEventListener("DOMContentLoaded", () => {
     renderNavAuth();
+    setupNavSearch();
     setupEventListeners();
     loadItems();
 });
@@ -107,16 +108,6 @@ function setupEventListeners() {
     });
 
     document.getElementById("btn-reset-filters").addEventListener("click", resetFilters);
-
-    document.getElementById("navbar-search").addEventListener("input", (e) => {
-        const val = e.target.value.trim().toLowerCase();
-        filters.search = val;
-        document.getElementById("explore-search-input").value = val;
-        const clearBtn = document.getElementById("explore-search-clear");
-        val ? clearBtn.classList.remove("hidden") : clearBtn.classList.add("hidden");
-        clearTimeout(undefined);
-        applyFilters();
-    });
 }
 
 function applyFilters() {

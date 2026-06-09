@@ -7,13 +7,22 @@ function logout() {
 
 /* navbar */
 function setupNavSearch() {
-    window.handleNavSearch = function () {
-        const q = document.getElementById("navbar-search")?.value.trim();
-        if (q) window.location.href = `explore.html?q=${encodeURIComponent(q)}`;
-    };
-    document.getElementById("navbar-search")?.addEventListener("keydown", e => {
-        if (e.key === "Enter") window.handleNavSearch();
+    const input = document.getElementById("navbar-search");
+    if (!input) return;
+
+    input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            const q = input.value.trim();
+            if (q) window.location.href = `explore.html?q=${encodeURIComponent(q)}`;
+        }
     });
+}
+
+function handleNavSearch() {
+    const input = document.getElementById("navbar-search");
+    if (!input) return;
+    const q = input.value.trim();
+    if (q) window.location.href = `explore.html?q=${encodeURIComponent(q)}`;
 }
 
 function renderNavAuth() {

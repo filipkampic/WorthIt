@@ -143,17 +143,6 @@ function applyFilters() {
 }
 
 
-function setupNavSearch() {
-    document.getElementById("navbar-search").addEventListener("input", (e) => {
-        const filterInput = document.getElementById("search-input");
-        if (filterInput) {
-            filterInput.value = e.target.value;
-            applyFilters();
-        }
-    });
-}
-
-
 function showLoading(show) {
     document.getElementById("loading-state").classList.toggle("hidden", !show);
     document.getElementById("products-grid").classList.toggle("hidden", show);
