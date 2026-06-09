@@ -61,13 +61,6 @@ function renderItem(item) {
     mainImg.src = item.image || "img/placeholder.png";
     mainImg.alt = item.name;
 
-    const thumbsEl = document.getElementById("gallery-thumbs");
-    thumbsEl.innerHTML = `
-        <div class="thumb active">
-            <img src="${item.image || 'img/placeholder.png'}" alt="${item.name}">
-        </div>
-    `;
-
     document.getElementById("product-category").textContent = capitalize(item.category);
     document.getElementById("product-title").textContent = item.name;
     document.getElementById("product-price").textContent = `€${Number(item.price).toFixed(2)}`;
