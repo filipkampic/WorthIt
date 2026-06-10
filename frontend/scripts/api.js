@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://worthit-backend-2us2.onrender.com";
 
 async function get(path) {
     try {
