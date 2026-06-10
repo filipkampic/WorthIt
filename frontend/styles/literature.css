@@ -1,0 +1,107 @@
+.literature-main {
+    padding: 2.5rem 2rem;
+    min-height: calc(100vh - 64px - 200px);
+}
+
+.literature-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.literature-header {
+    margin-bottom: 2.5rem;
+}
+
+.literature-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+}
+
+.literature-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.literature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.literature-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.literature-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.literature-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    background: #EEF2FF;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    width: fit-content;
+}
+
+.literature-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.literature-card-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    flex: 1;
+}
+
+.literature-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.literature-links a {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: #EEF2FF;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+
+.literature-links a:hover {
+    background: #E0E7FF;
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .literature-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .literature-main {
+        padding: 1.5rem 1rem;
+    }
+}

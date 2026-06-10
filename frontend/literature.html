@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorthIt — Literature</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/literature.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <img src="img/worth-it-logo.png" alt="WorthIt" class="nav-logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="explore.html" class="nav-link">Explore</a></li>
+                <li><a href="add-product.html" class="nav-link">Add Product</a></li>
+            </ul>
+            <div class="nav-search">
+                <input type="text" id="navbar-search" class="nav-search-input" placeholder="Search products..." aria-label="Search products">
+                <button class="nav-search-btn" onclick="handleNavSearch()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="nav-auth" id="nav-auth"></div>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="literature-main">
+        <div class="literature-inner">
+            <div class="literature-header">
+                <h1 class="literature-title">Literature & Sources</h1>
+                <p class="literature-subtitle">A list of all resources, tools, and references used in the development of WorthIt.</p>
+            </div>
+
+            <div class="literature-grid">
+                <div class="literature-card">
+                    <div class="literature-card-header">
+                        <span class="literature-tag">AI Tools</span>
+                        <h2 class="literature-card-title">Claude & ChatGPT</h2>
+                    </div>
+                    <p class="literature-card-desc">AI assistants used as development support: advice on feature implementation, generating seed data for the database, and suggestions for CSS design and UI components.</p>
+                    <div class="literature-links">
+                        <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>
+                        <a href="https://chatgpt.com" target="_blank" rel="noopener">chatgpt.com</a>
+                    </div>
+                </div>
+
+                <div class="literature-card">
+                    <div class="literature-card-header">
+                        <span class="literature-tag">Community</span>
+                        <h2 class="literature-card-title">Stack Overflow</h2>
+                    </div>
+                    <p class="literature-card-desc">Used for resolving specific technical problems and edge cases encountered during development.</p>
+                    <div class="literature-links">
+                        <a href="https://stackoverflow.com" target="_blank" rel="noopener">stackoverflow.com</a>
+                    </div>
+                </div>
+
+                <div class="literature-card">
+                    <div class="literature-card-header">
+                        <span class="literature-tag">Course Materials</span>
+                        <h2 class="literature-card-title">Laboratory Exercises</h2>
+                    </div>
+                    <p class="literature-card-desc">Course materials from laboratory exercises served as the foundation for the project structure and technical requirements.</p>
+                </div>
+
+                <div class="literature-card">
+                    <div class="literature-card-header">
+                        <span class="literature-tag">Documentation</span>
+                        <h2 class="literature-card-title">Express.js & MDN Web Docs</h2>
+                    </div>
+                    <p class="literature-card-desc">Official references for REST API implementation, routing, and JavaScript built-in methods.</p>
+                    <div class="literature-links">
+                        <a href="https://expressjs.com/en/" target="_blank" rel="noopener">expressjs.com</a>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener">developer.mozilla.org</a>
+                    </div>
+                </div>
+
+                <div class="literature-card">
+                    <div class="literature-card-header">
+                        <span class="literature-tag">Reference</span>
+                        <h2 class="literature-card-title">W3Schools</h2>
+                    </div>
+                    <p class="literature-card-desc">Used as a reference and examples source for HTML, CSS, JavaScript, and Node.js.</p>
+                    <div class="literature-links">
+                        <a href="https://www.w3schools.com" target="_blank" rel="noopener">w3schools.com</a>
+                    </div>
+                </div>
+
+                <div class="literature-card">
+                    <div class="literature-card-header">
+                        <span class="literature-tag">Design</span>
+                        <h2 class="literature-card-title">Google Fonts & Font Awesome</h2>
+                    </div>
+                    <p class="literature-card-desc">Google Fonts provides the Inter typeface used throughout the application. Font Awesome is used for the password visibility toggle icon.</p>
+                    <div class="literature-links">
+                        <a href="https://fonts.google.com" target="_blank" rel="noopener">fonts.google.com</a>
+                        <a href="https://fontawesome.com" target="_blank" rel="noopener">fontawesome.com</a>
+                    </div>
+                </div>
+
+                <div class="literature-card">
+                    <div class="literature-card-header">
+                        <span class="literature-tag">Icons</span>
+                        <h2 class="literature-card-title">Lucide Icons</h2>
+                    </div>
+                    <p class="literature-card-desc">Open-source SVG icon library used throughout the interface for consistent and clean iconography.</p>
+                    <div class="literature-links">
+                        <a href="https://lucide.dev" target="_blank" rel="noopener">lucide.dev</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="img/worth-it-logo-2nd.png" alt="WorthIt" class="footer-logo-img">
+                <p class="footer-tagline">Honest community reviews.<br>Real value insights.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Navigate</h4>
+                    <a href="index.html">Home</a>
+                    <a href="explore.html">Explore</a>
+                    <a href="add-product.html">Add Product</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <div id="footer-account-links">
+                        <a href="login.html">Login</a>
+                        <a href="register.html">Sign Up</a>
+                        <a href="profile.html">Profile</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <a href="literature.html">Literature</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026. WorthIt. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="scripts/api.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script>
+        renderNavAuth();
+        setupNavSearch();
+        renderFooterAuth();
+    </script>
+</body>
+</html>
