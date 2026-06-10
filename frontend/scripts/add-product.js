@@ -37,14 +37,14 @@ categorySelect.addEventListener("change", () => {
 
 priceInput.addEventListener("input", () => {
     const val = parseFloat(priceInput.value);
-    previewPrice.textContent = isNaN(val) ? "€0.00" : `€${val.toFixed("")}`;
+    previewPrice.textContent = isNaN(val) ? "€0.00" : `€${val.toFixed(2)}`;
 });
 
 imageUrlInput.addEventListener("input", () => {
     updateImagePreview(imageUrlInput.value.trim());
 });
 
-descCount.addEventListener("input", () => {
+descInput.addEventListener("input", () => {
     descCount.textContent = descInput.value.length;
 });
 
