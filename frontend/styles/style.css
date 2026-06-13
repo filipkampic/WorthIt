@@ -525,6 +525,23 @@ a:hover {
     .nav-hamburger {
         display: flex;
     }
+    .nav-links.nav-open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-bottom: 1px solid var(--border-color);
+        padding: 1rem 1.5rem;
+        z-index: 99;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        gap: 0.5rem;
+    }
+    .nav-auth {
+        margin-left: auto;
+    }
 }
 
 @media (max-width: 768px) {

@@ -131,6 +131,11 @@ function sortItems(items, sort) {
         case "price-asc": return [...items].sort((a, b) => a.price - b.price);
         case "price-desc": return [...items].sort((a, b) => b.price - a.price);
         case "reviews-desc": return [...items].sort((a, b) => (b.reviewCount || 0) - (a.reviewCount || 0));
+        case "bargain": return [...items].sort((a, b) => {
+            if (a.status === "Bargain" && b.status !== "Bargain") return -1;
+            if (a.status !== "Bargain" && b.status === "Bargain") return 1;
+            return 0;
+        });
         default: return items;
     }
 }
