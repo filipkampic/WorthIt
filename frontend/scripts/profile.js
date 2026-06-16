@@ -2,7 +2,7 @@ requireLogin();
 
 const userId = localStorage.getItem("userId");
 
-async function init() {
+document.addEventListener("DOMContentLoaded", async () => {
     renderNavAuth();
     setupTabs();
     setupLogout();
@@ -30,7 +30,7 @@ async function init() {
     lucide.createIcons();
     await renderAddedTab();
     await renderSavedTab();
-}
+});
 
 function renderSidebar(profile, stats) {
     const initials = profile.username ? profile.username.slice(0, 2).toUpperCase() : "??";
@@ -257,5 +257,3 @@ function setupLogout() {
         logout();
     });
 }
-
-init();
