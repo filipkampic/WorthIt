@@ -23,22 +23,6 @@ async function getReviewsForItem(itemId) {
     return reviews;
 }
 
-async function getReviewsByUser(userId) {
-    if (!userId || typeof userId !== "string") {
-        throw new Error("Invalid user ID.");
-    }
-
-    const snapshot = await db
-        .collection("reviews")
-        .where("userId", "==", userId)
-        .get();
-
-    return snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-    }));
-}
-
 async function addReview(itemId, data) {
     const { userId, rating, comment } = data;
 
@@ -105,7 +89,6 @@ async function deleteReview(reviewId, userId) {
 
 module.exports = {
     getReviewsForItem,
-    getReviewsByUser,
     addReview,
     deleteReview
 };

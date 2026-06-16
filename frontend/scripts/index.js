@@ -14,8 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function loadItems() {
     showLoading(true);
     try {
-        const res = await fetch(`${BASE_URL}/items`);
-        const data = await res.json();
+        const data = await get("/items");
         allItems = data;
         filteredItems = data;
         updateHeroStats(data);
